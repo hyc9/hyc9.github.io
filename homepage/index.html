@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yu Cheng — Streaming &amp; Interactive Video Generation</title>
+<meta name="description" content="Yu Cheng, PhD candidate at Westlake University. Research on streaming and interactive video generation and editing: bidirectional-to-autoregressive conversion, few-step distillation, and efficient video latents.">
+<style>
+  :root{
+    --text:#1c1e21; --muted:#5f6670; --line:#e3e6ea; --link:#1257a6;
+    --bg:#ffffff; --soft:#f6f7f9;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",
+         "PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:48px 24px 72px}
+  a{color:var(--link);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* ---- header ---- */
+  header{display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;
+         padding-bottom:28px;border-bottom:1px solid var(--line)}
+  .photo{width:170px;flex:0 0 170px}
+  .photo img{width:170px;height:170px;object-fit:cover;border-radius:6px;
+             display:block;background:var(--soft)}
+  .who{flex:1 1 340px;min-width:280px}
+  h1{margin:0 0 2px;font-size:29px;letter-spacing:-.2px;font-weight:650}
+  .role{margin:0 0 12px;font-size:16.5px;color:var(--muted)}
+  .role strong{color:var(--text);font-weight:600}
+  .contact{margin:0 0 14px;font-size:14.5px;color:var(--muted);line-height:1.85}
+  .contact a{white-space:nowrap}
+  .sep{color:#c8ccd2;margin:0 6px}
+  .btnrow{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{font-size:14px;padding:5px 12px;border:1px solid var(--line);
+       border-radius:5px;background:var(--soft);color:var(--text)}
+  .btn:hover{background:#eef0f3;text-decoration:none}
+
+  /* ---- sections ---- */
+  section{padding-top:34px}
+  h2{font-size:13px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;
+     color:var(--muted);margin:0 0 14px}
+  p{margin:0 0 12px}
+  .lead{font-size:16.5px}
+
+  ul.news{list-style:none;margin:0;padding:0;font-size:15px}
+  ul.news li{padding:5px 0;display:flex;gap:12px}
+  ul.news time{flex:0 0 92px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+  ol.pubs{list-style:none;margin:0;padding:0;counter-reset:p}
+  ol.pubs li{counter-increment:p;padding:11px 0;border-top:1px solid var(--line);
+             display:flex;gap:12px;font-size:15px}
+  ol.pubs li:first-child{border-top:none}
+  ol.pubs li::before{content:"[" counter(p) "]";flex:0 0 30px;color:var(--muted);
+                     font-variant-numeric:tabular-nums}
+  .t{font-weight:600}
+  .authors{color:var(--muted)}
+  .authors b{color:var(--text)}
+  .venue{font-style:italic;color:var(--muted)}
+  .links{font-size:13.5px;margin-top:3px}
+  .links a{margin-right:10px}
+  .tag{display:inline-block;font-size:11.5px;padding:1px 6px;border-radius:3px;
+       background:#eef3fa;color:#1257a6;margin-left:6px;vertical-align:1px}
+
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  td{padding:7px 0;vertical-align:top;border-top:1px solid var(--line)}
+  tr:first-child td{border-top:none}
+  td.when{flex:0 0 auto;width:140px;color:var(--muted);
+          font-variant-numeric:tabular-nums;padding-right:16px}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
+  @media (max-width:640px){
+    .wrap{padding:28px 18px 56px}
+    header{gap:20px}
+    .photo,.photo img{width:120px;height:120px;flex-basis:120px}
+    h1{font-size:24px}
+    .grid{grid-template-columns:1fr}
+    td.when{width:104px}
+  }
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
+         font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HEADER ============ -->
+  <header>
+    <div class="photo">
+      <!-- Portrait is assets/photo.png (380x540). Swap in a square ~800x800 crop if you
+           prefer; object-position below is tuned for a portrait-orientation photo. -->
+      <img src="assets/photo.png" alt="Yu Cheng"
+           style="object-position:50% 28%"
+           onerror="this.onerror=null;this.src='assets/photo-placeholder.svg'">
+    </div>
+    <div class="who">
+      <h1>Yu Cheng&nbsp;&nbsp;<span style="font-weight:400;color:var(--muted)">程瑜</span></h1>
+      <p class="role">
+        PhD Candidate (5th year), <strong>School of Engineering, Westlake University</strong><br>
+        Joint programme with Zhejiang University &middot; Advisor: Fajie Yuan
+      </p>
+      <p class="contact">
+        Hangzhou, China<br>
+        <a href="mailto:chengyu@westlake.edu.cn">chengyu@westlake.edu.cn</a>
+        <span class="sep">|</span>
+        <a href="https://scholar.google.com/citations?hl=en&amp;user=NbYDWK0AAAAJ">Google Scholar</a>
+        <span class="sep">|</span>
+        <a href="https://github.com/hyc9">GitHub</a>
+      </p>
+      <div class="btnrow">
+        <a class="btn" href="assets/cv.pdf">CV (PDF)</a>
+        <a class="btn" href="https://scholar.google.com/citations?hl=en&amp;user=NbYDWK0AAAAJ">Publications</a>
+        <a class="btn" href="https://github.com/hyc9">Github</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about">
+    <h2>About</h2>
+    <p class="lead">
+      My research has followed one line: models that work on real, platform-scale
+      multimodal data, and that are fast and controllable enough to be deployed. It runs in
+      three phases &mdash; <strong>multimodal understanding and recommendation</strong>
+      for industrial content platforms, then <strong>efficient video generation</strong>,
+      and now <strong>streaming and interactive video generation and editing</strong>,
+      which is where the rest of my PhD goes. All of it has been done on industrial data,
+      where a model is judged on quality, controllability, speed and cost together.
+    </p>
+
+    <p>
+      <strong>Research interests:</strong> streaming and interactive video generation and
+      editing; few-step distillation; efficient video generation; multimodal representation
+      learning.
+    </p>
+  </section>
+
+  <!-- ============ PUBLICATIONS ============ -->
+  <!-- Author lists verified against arXiv / conference metadata. <b>Yu Cheng</b> = me. -->
+  <section id="publications">
+    <h2>Publications</h2>
+    <ol class="pubs">
+
+      <li><div>
+        <div class="t">CoinVE-200K: A Large-Scale High-Quality Dataset for Compositional
+          Instruction-Guided Video Editing</div>
+        <div class="authors">Fuchen Long, Cong Wang, Zitao Gao, Wenhao Zhong,
+          <b>Yu Cheng</b>, Xiaolu Hou, Yan Li, Xiao Cao, Xinlong Sun, Xi Chen, Yu Liu</div>
+        <div class="venue">arXiv:2608.17566, 2026</div>
+        <div class="links"><a href="https://arxiv.org/abs/2608.17566">arXiv</a></div>
+      </div></li>
+
+      <li><div>
+        <div class="t">Dynamic-in-Few-Step: Unifying Dynamic Computation and Few-Step
+          Distillation for Efficient Video Generation</div>
+        <div class="authors"><b>Yu Cheng</b>, Siyue Yao, Zhongang Qi, Shanyan Guan, Wei Li,
+          Fajie Yuan</div>
+        <div class="venue">arXiv:2607.06631, 2026 </div>
+        <div class="links"><a href="https://arxiv.org/abs/2607.06631">arXiv</a></div>
+      </div></li>
+
+      <li><div>
+        <div class="t">LeanVAE: An Ultra-Efficient Reconstruction VAE for Video Diffusion
+          Models</div>
+        <div class="authors"><b>Yu Cheng</b>, Fajie Yuan</div>
+        <div class="venue">ICCV 2025</div>
+        <div class="links">
+          <a href="https://arxiv.org/abs/2503.14325">arXiv</a>
+          <a href="https://github.com/westlake-repl/LeanVAE">Code</a>
+        </div>
+      </div></li>
+
+      <li><div>
+        <div class="t">An Image Dataset for Benchmarking Recommender Systems with Raw
+          Pixels (PixelRec)</div>
+        <div class="authors"><b>Yu Cheng</b>, Yunzhu Pan, Jiaqi Zhang, Yongxin Ni, Aixin Sun,
+          Fajie Yuan</div>
+        <div class="venue">SDM 2024</div>
+        <div class="links"><a href="https://arxiv.org/abs/2309.06789">arXiv</a>
+          <a href="https://github.com/westlake-repl/PixelRec">Code</a></div>
+      </div></li>
+
+      <li><div>
+        <div class="t">NineRec: A Benchmark Dataset Suite for Evaluating Transferable
+          Recommendation</div>
+        <div class="authors">Jiaqi Zhang, <b>Yu Cheng</b>, Yongxin Ni, Yunzhu Pan, Zheng Yuan,
+          Junchen Fu, Youhua Li, Jie Wang, Fajie Yuan</div>
+        <div class="venue">IEEE TPAMI, 2024</div>
+        <div class="links"><a href="https://arxiv.org/abs/2309.07705">arXiv</a>
+          <a href="https://github.com/westlake-repl/NineRec">Code</a></div>
+      </div></li>
+
+      <li><div>
+        <div class="t">A Content-Driven Micro-Video Recommendation Dataset at Scale
+          (MicroLens)</div>
+        <div class="authors">Yongxin Ni, <b>Yu Cheng</b>, Xiangyan Liu, Junchen Fu, Youhua Li,
+          Xiangnan He, Yongfeng Zhang, Fajie Yuan</div>
+        <div class="venue">CIKM 2025</div>
+        <div class="links"><a href="https://arxiv.org/abs/2309.15379">arXiv</a>
+          <a href="https://github.com/westlake-repl/MicroLens">Code</a></div>
+      </div></li>
+
+      <li><div>
+        <div class="t">Exploring the Upper Limits of Text-Based Collaborative Filtering Using
+          Large Language Models: Discoveries and Insights</div>
+        <div class="authors">Ruyu Li, Wenhao Deng, <b>Yu Cheng</b>, Zheng Yuan, Jiaqi Zhang,
+          Fajie Yuan</div>
+        <div class="venue">CIKM 2025</div>
+      </div></li>
+
+    </ol>
+  </section>
+
+  <!-- ============ OPEN SOURCE ============ -->
+  <section id="code">
+    <h2>Open source</h2>
+    <table>
+      <tr><td class="when">116&nbsp;stars</td><td>
+        <a href="https://github.com/westlake-repl/LeanVAE"><strong>LeanVAE</strong></a>
+        &mdash; complete from-scratch video VAE training pipeline; efficient architecture
+        for latent video diffusion; supports post-training alignment to the Wan-VAE latent
+        space.</td></tr>
+      <tr><td class="when">&nbsp;</td><td>
+        <a href="https://github.com/westlake-repl/Wan-DMD"><strong>Wan-DMD</strong></a>
+        &mdash; 4-step distillation for Wan2.1-T2V (1.3B / 14B) via decoupled DMD + GAN on
+        real video; FSDP ZeRO-3 + CPU offload + T5 offload + gradient checkpointing bring
+        14B distillation to modest hardware.</td></tr>
+      <tr><td class="when">187&nbsp;stars</td><td>
+        <a href="https://github.com/westlake-repl/PixelRec"><strong>PixelRec</strong></a>
+        &mdash; image recommendation library covering recommendation algorithms and vision
+        backbones.</td></tr>
+      <tr><td class="when">104 / 271&nbsp;stars</td><td>
+        <a href="https://github.com/westlake-repl/NineRec"><strong>NineRec</strong></a> and
+        <a href="https://github.com/westlake-repl/MicroLens"><strong>MicroLens</strong></a>
+        &mdash; transferable and short-video recommendation libraries.</td></tr>
+    </table>
+  </section>
+
+  <!-- ============ EXPERIENCE / EDUCATION ============ -->
+  <section id="experience">
+    <h2>Experience &amp; education</h2>
+    <div class="grid">
+      <div>
+        <table>
+          <tr><td class="when">2026.06&ndash;now</td><td><strong>Research intern, Tencent PCG</strong><br>
+            Online Video BU, Smart Creation Platform.<br>
+            Streaming / interactive video editing; compositional editing data.</td></tr>
+          <tr><td class="when">2025.08&ndash;2026.06</td><td><strong>Research intern, vivo</strong><br>
+            BlueImage, Imaging R&amp;D Center.<br>
+            Efficient post-training for large video diffusion models.</td></tr>
+          <tr><td class="when">2023.11&ndash;2024.02</td><td><strong>Research intern, Kuaishou</strong><br>
+            Multimodal recommendation.</td></tr>
+        </table>
+      </div>
+      <div>
+        <table>
+          <tr><td class="when">2022.09&ndash;2027.06</td><td><strong>PhD, Westlake University</strong><br>
+            Computer Science &amp; Technology (AI), School of Engineering; joint programme
+            with Zhejiang University.<br>Advisor: Fajie Yuan.</td></tr>
+          <tr><td class="when">2018.09&ndash;2022.06</td><td><strong>BSc, USTC</strong><br>
+            Data Science, School of Data Science.</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Last updated October 2026 &middot; Built with plain HTML/CSS.
+  </footer>
+
+</div>
+</body>
+</html>
